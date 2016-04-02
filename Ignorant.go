@@ -32,7 +32,7 @@ const (
 	FETCH_URL = "https://github.com/github/gitignore"
 )
 
-var CURDIR, _ = filepath.Abs(filepath.Dir(os.Args[0]))
+// var CURDIR, _ = filepath.Abs(filepath.Dir(os.Args[0]))
 
 type ResultDatum struct {
 	Path string
@@ -51,7 +51,7 @@ func FetchRepo() {
 	// if does not exist, clone
 	if _, err := os.Stat("gitignore"); os.IsNotExist(err) {
 		fmt.Println("Fetching gitignore repo from: %s", FETCH_URL)
-		data, err := exec.Command("git", "-C", CURDIR, "clone", FETCH_URL).CombinedOutput()
+		data, err := exec.Command("git", "-C", "gitignore", "clone", FETCH_URL).CombinedOutput()
 		if err != nil {
 			fmt.Println(string(data), err)
 		} else {
