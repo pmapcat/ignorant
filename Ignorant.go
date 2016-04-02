@@ -53,7 +53,7 @@ func FetchRepo() {
 	// if does not exist, clone
 	if _, err := os.Stat(GITIGNORE_DIR); os.IsNotExist(err) {
 		fmt.Sprintf("Fetching gitignore repo from: %s", FETCH_URL)
-		data, err := exec.Command("git", "-C", GITIGNORE_DIR, "clone", FETCH_URL).CombinedOutput()
+		data, err := exec.Command("git", "-C", EXEC_DIR, "clone", FETCH_URL).CombinedOutput()
 		if err != nil {
 			fmt.Println(string(data), err)
 		} else {
