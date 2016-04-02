@@ -21,7 +21,7 @@ If you want to output your .gitignore file to stdout, please specify stdout opti
 === Show possible languages/frameworks
 
     ignorant show
-    ignore show | grep clojure
+    ignorant show | grep clojure
 
 Keep in mind, that all language/framework *names are lowercased* to be easily greppable
 
