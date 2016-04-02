@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/codegangsta/cli"
 	"github.com/hoisie/mustache"
+	"github.com/kardianos/osext"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -32,7 +33,8 @@ const (
 	FETCH_URL = "https://github.com/github/gitignore"
 )
 
-// var CURDIR, _ = filepath.Abs(filepath.Dir(os.Args[0]))
+var EXEC_DIR, _ = osext.ExecutableFolder()
+var GITIGNORE_DIR = filepath.Join(EXEC_DIR, "gitignore")
 
 type ResultDatum struct {
 	Path string
@@ -49,9 +51,9 @@ func (r ResultDatum) Url() string {
 
 func FetchRepo() {
 	// if does not exist, clone
-	if _, err := os.Stat("gitignore"); os.IsNotExist(err) {
-		fmt.Println("Fetching gitignore repo from: %s", FETCH_URL)
-		data, err := exec.Command("git", "-C", "gitignore", "clone", FETCH_URL).CombinedOutput()
+	if _, err := os.Stat(GITIGNORE_DIR); os.IsNotExist(err) {
+		fmt.Sprintf("Fetching gitignore repo from: %s", FETCH_URL)
+		data, err := exec.Command("git", "-C", GITIGNORE_DIR, "clone", FETCH_URL).CombinedOutput()
 		if err != nil {
 			fmt.Println(string(data), err)
 		} else {
@@ -59,9 +61,9 @@ func FetchRepo() {
 		}
 	}
 	// if exists,pull
-	if _, err := os.Stat("gitignore"); err == nil {
+	if _, err := os.Stat(GITIGNORE_DIR); err == nil {
 		fmt.Printf("Updating gitnigore repo from: %s", FETCH_URL)
-		data, err := exec.Command("git", "-C", "gitignore", "pull", FETCH_URL).CombinedOutput()
+		data, err := exec.Command("git", "-C", GITIGNORE_DIR, "pull", FETCH_URL).CombinedOutput()
 		if err != nil {
 			fmt.Println(string(data), err)
 		} else {
@@ -78,7 +80,7 @@ func ShowPossibleIgnores(data map[string]ResultDatum) {
 
 func GetPossibleIgnores() map[string]ResultDatum {
 	result := map[string]ResultDatum{}
-	filepath.Walk("gitignore", func(curPath string, info os.FileInfo, err error) error {
+	filepath.Walk(GITIGNORE_DIR, func(curPath string, info os.FileInfo, err error) error {
 		if filepath.Ext(info.Name()) == ".gitignore" {
 			item := ResultDatum{}
 			item.Path = curPath
