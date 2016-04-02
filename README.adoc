@@ -8,20 +8,20 @@ image::doc/example.png[Image]
 
 === Create gitignore
 
-    Ignorant use Clojure Leiningen WordPress
+    ignorant use Clojure Leiningen WordPress
 
 It will generate .gitignore file after
 it fetches the last version of https://github.com/github/gitignore[gitignore]
 Keep in mind, that all language/framework *names are lowercased* to be easily greppable
 If you want to output your .gitignore file to stdout, please specify stdout option
 
-    Ignorant --stdout use Clojure Leiningen WordPress
+    ignorant --stdout use Clojure Leiningen WordPress
 
 
 === Show possible languages/frameworks
 
-    Ignorant show
-    Ignore show | grep clojure
+    ignorant show
+    ignore show | grep clojure
 
 Keep in mind, that all language/framework *names are lowercased* to be easily greppable
 
