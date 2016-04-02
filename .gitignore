@@ -1,12 +1,10 @@
 
 ##############################################
 This is a composed .gitignore file for
-go 
+go clojure 
 This file is MIT licensed.
 It uses https://github.com/github/gitignore repo 
 for composable components.
-
-/gitignore/
 
 ##############################################
 # Gitignore file for go #
@@ -35,6 +33,21 @@ _testmain.go
 *.exe
 *.test
 *.prof
+ 
+# Gitignore file for clojure #
+# Source: https://github.com/github/gitignore/blob/master/Clojure.gitignore #
+pom.xml
+pom.xml.asc
+*jar
+/lib/
+/classes/
+/target/
+/checkouts/
+.lein-deps-sum
+.lein-repl-history
+.lein-plugins/
+.lein-failures
+.nrepl-port
  
 
 ######################################

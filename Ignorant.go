@@ -21,8 +21,8 @@ for composable components.
 
 ##############################################
 {{#Items}}
-# Gitignore file for {{LangName}} #
-# Source: {{Url}} #
+###### Gitignore file for {{LangName}} ######
+###### Source: {{Url}} ######
 {{{Src}}} 
 {{/Items}}
 ######################################
