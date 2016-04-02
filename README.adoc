@@ -52,4 +52,4 @@ link:./LICENSE[The MIT License].
 
 == Author
 
-Michael Leachim <mklimoff222@gmail.com># 
+Michael Leachim <mklimoff222@gmail.com>
