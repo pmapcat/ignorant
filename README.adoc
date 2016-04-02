@@ -2,8 +2,6 @@
 
 Easily compose many different .gitignore files into one
 
-image::doc/example.png[Image]
-
 == Usage
 
 === Create gitignore
