@@ -81,6 +81,9 @@ func ShowPossibleIgnores(data map[string]ResultDatum) {
 func GetPossibleIgnores() map[string]ResultDatum {
 	result := map[string]ResultDatum{}
 	filepath.Walk(GITIGNORE_DIR, func(curPath string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
 		if filepath.Ext(info.Name()) == ".gitignore" {
 			item := ResultDatum{}
 			item.Path = curPath
