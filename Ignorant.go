@@ -33,7 +33,6 @@ const (
 )
 
 var CURDIR, _ = filepath.Abs(filepath.Dir(os.Args[0]))
-var GITIGNORE_DIR = filepath.Join(CURDIR, "gitignore")
 
 type ResultDatum struct {
 	Path string
@@ -50,7 +49,7 @@ func (r ResultDatum) Url() string {
 
 func FetchRepo() {
 	// if does not exist, clone
-	if _, err := os.Stat(GITIGNORE_DIR); os.IsNotExist(err) {
+	if _, err := os.Stat("gitignore"); os.IsNotExist(err) {
 		fmt.Println("Fetching gitignore repo from: %s", FETCH_URL)
 		data, err := exec.Command("git", "-C", CURDIR, "clone", FETCH_URL).CombinedOutput()
 		if err != nil {
@@ -62,7 +61,7 @@ func FetchRepo() {
 	// if exists,pull
 	if _, err := os.Stat("gitignore"); err == nil {
 		fmt.Printf("Updating gitnigore repo from: %s", FETCH_URL)
-		data, err := exec.Command("git", "-C", GITIGNORE_DIR, "pull", FETCH_URL).CombinedOutput()
+		data, err := exec.Command("git", "-C", "gitignore", "pull", FETCH_URL).CombinedOutput()
 		if err != nil {
 			fmt.Println(string(data), err)
 		} else {
@@ -79,7 +78,7 @@ func ShowPossibleIgnores(data map[string]ResultDatum) {
 
 func GetPossibleIgnores() map[string]ResultDatum {
 	result := map[string]ResultDatum{}
-	filepath.Walk(GITIGNORE_DIR, func(curPath string, info os.FileInfo, err error) error {
+	filepath.Walk("gitignore", func(curPath string, info os.FileInfo, err error) error {
 		if filepath.Ext(info.Name()) == ".gitignore" {
 			item := ResultDatum{}
 			item.Path = curPath
